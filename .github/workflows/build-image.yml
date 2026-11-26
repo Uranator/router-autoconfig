@@ -1,0 +1,69 @@
+name: Build OpenWrt Image (Cudy WR3000S v1)
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Firmware version tag'
+        required: true
+        default: 'v1.0.0'
+      profile:
+        description: 'Target profile'
+        required: true
+        default: 'cudy_wr3000s-v1'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Build OpenWrt Image
+        uses: fantastic-packages/gh-action-imagebuilder@main
+        with:
+          profile: cudy_wr3000s-v1
+          version: ${{ github.event.inputs.version }}
+          packages: |
+            tachyon
+            luci-app-tachyon
+            luci-i18n-tachyon-ru
+            zram-swap
+            -wireguard-tools
+            -ppp
+            -ppp-mod-pppoe
+            -kmod-nft-offload
+          files: |
+            etc/config/tachyon -> configs/tachyon.config
+            etc/config/network -> configs/network.config
+            etc/config/firewall -> configs/firewall.config
+            etc/config/dhcp -> configs/dhcp.config
+          exclude: |
+            /usr/lib/lua/luci/view/tachyon/*
+          repo: openwrt/openwrt
+          release: 24.10
+
+      - name: Upload firmware to Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: firmware-${{ github.event.inputs.version }}
+          name: "OpenWrt ${{ github.event.inputs.version }} for Cudy WR3000S v1"
+          body: |
+            Прошивка для Cudy WR3000S v1 (MT7986) с предустановленным Tachyon.
+            
+            Включает:
+            - Tachyon core + luci-app-tachyon + ru i18n
+            - zram-swap для оптимизации памяти
+            - Предустановленные конфиги (Direct_RU, Desync, VPN)
+            
+            Установка через sysupgrade.
+          files: |
+            *.bin
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
