@@ -26,26 +26,29 @@ jobs:
       - name: Build OpenWrt Image
         uses: fantastic-packages/gh-action-imagebuilder@master
         with:
-          profile: cudy_wr3000s-v1
-          version: ${{ github.event.inputs.version }}
-          packages: |
-            tachyon
-            luci-app-tachyon
-            luci-i18n-tachyon-ru
-            zram-swap
-            -wireguard-tools
-            -ppp
-            -ppp-mod-pppoe
-            -kmod-nft-offload
-          files: |
-            etc/config/tachyon -> configs/tachyon.config
-            etc/config/network -> configs/network.config
-            etc/config/firewall -> configs/firewall.config
-            etc/config/dhcp -> configs/dhcp.config
-          exclude: |
-            /usr/lib/lua/luci/view/tachyon/*
-          repo: openwrt/openwrt
-          release: 24.10
+          cache: false
+        env:
+          TARGET: mediatek/filogic
+          VERSION: 24.10.0
+          PROFILE: cudy_wr3000s-v1
+          PACKAGES: tachyon luci-app-tachyon luci-i18n-tachyon-ru zram-swap -wireguard-tools -ppp -ppp-mod-pppoe -kmod-nft-offload
+          ROOTFS_SIZE: 256
+          ARTIFACTS_DIR: ${{ github.workspace }}/artifacts
+          EXTRA_REPOS: |
+            https://raw.githubusercontent.com/fantastic-packages/releases/gh-pages/24.10/packages/aarch64_cortex-a53/packages/packages.adb
+            https://raw.githubusercontent.com/fantastic-packages/releases/gh-pages/24.10/packages/aarch64_cortex-a53/luci/packages.adb
+            https://raw.githubusercontent.com/fantastic-packages/releases/gh-pages/24.10/packages/aarch64_cortex-a53/special/packages.adb
+          NO_LOCAL_REPOS: 1
+          PUBLIC_KEY_VERIFY: >-
+            LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0NCk1Ga3dFd1lIS29aSXpqMENBUVlJS29aSXpqMERBUWNEUWdBRVAxYkJEVDRSMVF1aFVXWTVxcUkxRk5RMHJzaEUNCk9oNTF4ZVZjTGFab1lrVVdOVEJVdGxUUU5Hc1dJY0ZGbjY2Y3VuNERGWTFrTFR6RjhrNVYxNDBaWGc9PQ0KLS0tLS1FTkQgUFVCTElDIEtFWS0tLS0tDQoK
+
+      - name: Copy config files
+        run: |
+          mkdir -p ${{ github.workspace }}/artifacts/files
+          cp configs/tachyon.config ${{ github.workspace }}/artifacts/files/etc/config/tachyon
+          cp configs/network.config ${{ github.workspace }}/artifacts/files/etc/config/network
+          cp configs/firewall.config ${{ github.workspace }}/artifacts/files/etc/config/firewall
+          cp configs/dhcp.config ${{ github.workspace }}/artifacts/files/etc/config/dhcp
 
       - name: Upload firmware to Release
         uses: softprops/action-gh-release@v1
@@ -54,15 +57,16 @@ jobs:
           name: "OpenWrt ${{ github.event.inputs.version }} for Cudy WR3000S v1"
           body: |
             Прошивка для Cudy WR3000S v1 (MT7986) с предустановленным Tachyon.
-            
+
             Включает:
             - Tachyon core + luci-app-tachyon + ru i18n
             - zram-swap для оптимизации памяти
             - Предустановленные конфиги (Direct_RU, Desync, VPN)
-            
+
             Установка через sysupgrade.
           files: |
-            *.bin
+            artifacts/bin/targets/mediatek/filogic/*.bin
+            artifacts/bin/targets/mediatek/filogic/*.itb
           draft: false
           prerelease: false
         env:
