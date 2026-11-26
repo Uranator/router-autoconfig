@@ -24,7 +24,7 @@ jobs:
           fetch-depth: 0
 
       - name: Build OpenWrt Image
-        uses: fantastic-packages/gh-action-imagebuilder@main
+        uses: fantastic-packages/gh-action-imagebuilder@master
         with:
           profile: cudy_wr3000s-v1
           version: ${{ github.event.inputs.version }}
