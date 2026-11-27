@@ -68,13 +68,13 @@ jobs:
             BIN_DIR="${{ github.workspace }}/artifacts/bin" \
             2>&1 | tee build.log
 
-      - name: Copy config files
+      - name: Copy config files to image
         run: |
-          mkdir -p ${{ github.workspace }}/artifacts/files
-          cp configs/tachyon.config ${{ github.workspace }}/artifacts/files/etc/config/tachyon
-          cp configs/network.config ${{ github.workspace }}/artifacts/files/etc/config/network
-          cp configs/firewall.config ${{ github.workspace }}/artifacts/files/etc/config/firewall
-          cp configs/dhcp.config ${{ github.workspace }}/artifacts/files/etc/config/dhcp
+          mkdir -p ${{ github.workspace }}/artifacts/files/etc/config
+          cp ${{ github.workspace }}/configs/tachyon.config ${{ github.workspace }}/artifacts/files/etc/config/tachyon
+          cp ${{ github.workspace }}/configs/network.config ${{ github.workspace }}/artifacts/files/etc/config/network
+          cp ${{ github.workspace }}/configs/firewall.config ${{ github.workspace }}/artifacts/files/etc/config/firewall
+          cp ${{ github.workspace }}/configs/dhcp.config ${{ github.workspace }}/artifacts/files/etc/config/dhcp
 
       - name: Upload firmware to Release
         uses: softprops/action-gh-release@v1
