@@ -61,6 +61,7 @@ jobs:
 
       - name: Build OpenWrt Image
         run: |
+          set -o pipefail
           make image \
             PROFILE="cudy_wr3000s-v1" \
             PACKAGES="tachyon luci-app-tachyon luci-i18n-tachyon-ru zram-swap -wireguard-tools -ppp -ppp-mod-pppoe -kmod-nft-offload" \
