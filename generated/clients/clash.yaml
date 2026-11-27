@@ -1,0 +1,103 @@
+port: 7890
+socks-port: 7891
+mixed-port: 7892
+redir-port: 7893
+tproxy-port: 7894
+ipv6: true
+allow-lan: true
+bind-address: "*"
+mode: rule
+log-level: info
+external-controller: 127.0.0.1:9090
+external-ui: ui
+secret: ""
+profile:
+  store-selected: true
+  store-fake-ip: true
+dns:
+  enable: true
+  prefer-h3: true
+  listen: 127.0.0.1:1053
+  ipv6: true
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  fake-ip-filter:
+    - "*.lan"
+    - "*.local"
+    - "localhost.*"
+  default-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+  nameserver:
+    - https://dns.google/dns-query
+    - https://cloudflare-dns.com/dns-query
+  fallback:
+    - https://dns.google/dns-query
+    - https://cloudflare-dns.com/dns-query
+  fallback-filter:
+    geoip: true
+    geoip-code: CN
+    ipcidr:
+      - 240.0.0.0/4
+proxies:
+  - name: "VPS-Reality"
+    type: vless
+    server: 138.124.112.202
+    port: 443
+    uuid: "14297db4-54b6-4d20-bda5-fdeb997f6c0a"
+    network: tcp
+    tls: true
+    flow: "xtls-rprx-vision"
+    udp: true
+    servername: www.microsoft.com
+    reality-opts:
+      public-key: "DjkuH9C_ZuXUqHxkkcZQqsMJyuh_F_5GADBTrnoodxc"
+      short-id: "75de117772021de3"
+    client-fingerprint: chrome
+  - name: "VPS-Hysteria2"
+    type: hysteria2
+    server: 138.124.112.202
+    port: 8445
+    password: "XSgT1WvxQX0QyUsaJrkCg5IpOmXM40JQskNwfEI+XPg="
+    alpn:
+      - h3
+    sni: www.microsoft.com
+    skip-cert-verify: true
+    up: "100 Mbps"
+    down: "100 Mbps"
+  - name: "VPS-SS2022"
+    type: ss
+    server: 138.124.112.202
+    port: 8388
+    cipher: "2022-blake3-aes-128-gcm"
+    password: "F25Pxnnp/Dt0rxARg+MxeRpYlRDW3piaainUeJhZnMs="
+    udp: true
+proxy-groups:
+  - name: "VPS"
+    type: select
+    proxies:
+      - "Auto"
+      - "VPS-Reality"
+      - "VPS-Hysteria2"
+      - "VPS-SS2022"
+  - name: "Auto"
+    type: url-test
+    url: "https://www.gstatic.com/generate_204"
+    interval: 60
+    tolerance: 50
+    proxies:
+      - "VPS-Reality"
+      - "VPS-Hysteria2"
+      - "VPS-SS2022"
+  - name: "DIRECT"
+    type: select
+    proxies:
+      - "DIRECT"
+  - name: "BLOCK"
+    type: select
+    proxies:
+      - "REJECT"
+rules:
+  - "GEOIP,CN,DIRECT"
+  - "GEOSITE,CN,DIRECT"
+  - "MATCH,VPS"

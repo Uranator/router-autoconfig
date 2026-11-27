@@ -1,0 +1,33 @@
+{
+  "vps_ip": "138.124.112.202",
+  "timestamp": "2026-11-26T23:43:14.974011Z",
+  "iterations": 10,
+  "latency_ms": {
+    "443": {
+      "min": 0.31,
+      "max": 4.02,
+      "avg": 0.88,
+      "median": 0.51,
+      "stdev": 1.13,
+      "samples": 10
+    },
+    "8388": {
+      "min": 0.29,
+      "max": 0.51,
+      "avg": 0.35,
+      "median": 0.34,
+      "stdev": 0.06,
+      "samples": 10
+    },
+    "8445": {
+      "error": "All attempts failed"
+    }
+  },
+  "packet_loss_pct": {
+    "443": 0.0,
+    "8388": 0.0,
+    "8445": 100.0
+  },
+  "tls_handshake_ms": 893.44,
+  "benchmark_file": "~/router-autoconfig/generated/vps-benchmark.json"
+}

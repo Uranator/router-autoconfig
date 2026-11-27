@@ -1,0 +1,30 @@
+# VPS Configs
+vless://14297db4-54b6-4d20-bda5-fdeb997f6c0a@138.124.112.202:443?encryption=none&flow=xtls-rprx-vision&fp=firefox&pbk=DjkuH9C_ZuXUqHxkkcZQqsMJyuh_F_5GADBTrnoodxc&security=reality&sid=75de117772021de3&sni=www.microsoft.com&type=tcp#VPS-Reality
+hy2://XSgT1WvxQX0QyUsaJrkCg5IpOmXM40JQskNwfEI+XPg=@138.124.112.202:8445?sni=www.microsoft.com&insecure=1#VPS-Hysteria2
+ss://2022-blake3-aes-128-gcm:F25Pxnnp/Dt0rxARg+MxeRpYlRDW3piaainUeJhZnMs=@138.124.112.202:8388#VPS-SS2022
+
+# Public Source 1: Hidashimora/free-vpn-anti-rkn configs/1.1.txt (OpenRay)
+# Подписка 1.1 | sakha1370/OpenRay
+vless://041e1ba9-5d17-4e7c-baac-c5aa877da29b@185.125.103.62:8082?encryption=none&fp=firefox&host=ruu2rx-oycdrnsrzc.9uokolpk04vmg2ecqb8oys7.workers.dev&path=/@Marisa_kristi&security=tls&sni=ruu2rx-oycdrnsrzc.9uokolpk04vmg2ecqb8oys7.workers.dev&type=ws#%5BOpenRay%5D%20%F0%9F%87%A9%F0%9F%87%AADE-1
+vless://2f35965a-9a9b-45fd-ba32-987296dfb6be@rs3.univesalsrv.com:443?encryption=none&security=reality&sni=rs3.univesalsrv.com&fp=firefox&pbk=gHDoSWGWMVZKWNKONWHw-Cpl0-bdI6GaKusgJIQ-vWQ&sid=35d05b666e2c6cdf&type=grpc&authority=&serviceName=edge.v2.FeedService&mode=gun#%5BOpenRay%5D%20%F0%9F%87%B7%F0%9F%87%B8RS-1
+ss://YWVzLTI1Ni1nY206WlJwZ2FCZUd4dEVOSVhndmhwa1pCS3o5R25XUlMyZFljeDlPK2EyaXdOND1AMTkzLjE1MS4xNjMuMTg6MTk5OTk=#%5BOpenRay%5D%20%F0%9F%87%BA%F0%9F%87%B8US-30
+vless://db80088c-32a1-4cb8-a907-0f3cb7844152@178.22.31.171:443?encryption=none&flow=xtls-rprx-vision&fp=firefox&pbk=zEntiD6D81wY__YHPvIw78e09CBIgYkyQ5meIo7c_hg&security=reality&sid=41ae8e266bc3346f&sni=at1.japancase.site&type=tcp#%5BOpenRay%5D%20%F0%9F%87%A6%F0%9F%87%B9AT-1
+vless://82b279c6-5cba-3a96-f8bd-780a00000035@172.67.155.222:443?host=pi7ews-woj41w-7wx0gk.ho3ein13-3af.workers.dev&path=%2Fsync&security=tls&sni=pi7ews-woj41w-7wx0gk.ho3ein13-3af.workers.dev&type=ws#%5BOpenRay%5D%20%F0%9F%8C%90XX-18
+ss://YWVzLTEyOC1nY206c2hhZG93c29ja3M=@156.146.38.168:443#%5BOpenRay%5D%20%F0%9F%87%BA%F0%9F%87%B8US-83
+
+# Public Source 2: Hidashimora/free-vpn-anti-rkn configs/2.1.txt (sevcator/5ubscrpt10n)
+# Подписка 2.1 | sevcator/5ubscrpt10n
+vless://d65cc14c-f53f-4fe2-b262-97856601319c@169.40.42.173:443?security=reality&encryption=none&pbk=e2RLf57Li_-MDZGE9ss1BWPgP54mqRb5PfXhW2jcVVg&headerType=none&fp=ios&type=tcp&flow=xtls-rprx-vision&sni=yahoo.com&sid=c39cc7310a#%F0%9F%87%A9%F0%9F%87%AAtelegram%E2%9E%A0%40v2rayNG_Matsuri
+vless://0dd1347e-e342-456c-b802-779b859cca42@104.31.16.32:443?path=%2Fmhdshws&security=tls&encryption=none&host=loolu.tech&type=ws&sni=loolu.tech#Join+Telegram:@Farah_VPN
+vless://2f956d32-8a67-4bc9-8995-e1621ad20ddc@31.76.76.26:443?path=/&security=none&encryption=none&type=ws#Join+Telegram:@Farah_VPN
+vless://b0804657-2bd1-4ccd-bdc8-b599b2d2f23d@216.167.37.6:37262?security=reality&encryption=none&pbk=2CdblQdVObz2O0shOAdrW5Joljbng8mXIoWVWa2sFSI&headerType=none&fp=chrome&spx=/&type=tcp&flow=xtls-rprx-vision&sni=yahoo.com&sid=3a8e473202#Join+Telegram:@Farah_VPN
+vless://501a2da5-cb22-4a3f-915e-e3b821d1d62d@87.199.205.28:443?flow=xtls-rprx-vision&fp=firefox&pbk=W-9zyiOq287RtXVTZlTFbSDJ0Mx8joyBLJoA7ZE7eBw&security=reality&sid=ef1d3554c652a436&sni=vkvd754.okcdn.ru&type=tcp#%F0%9F%87%B5%F0%9F%87%B1PL-13
+
+# Public Source 3: Hidashimora/free-vpn-anti-rkn configs/3.1.txt (yitong2333/proxy-minging)
+# Подписка 3.1 | yitong2333/proxy-minging
+hy2://afc8e385-dc0f-4b26-a5ed-b0fbf08b9df6@tr.xn--9kqx4sc0n.shop:21325/#%F0%9F%93%9F40@oneclickvpnkeys
+ss://MjAyMi1ibGFrZTMtYWVzLTEyOC1nY206alViRE5zRmFtdHlEZnBtK3JJM1p5dz09@38.145.220.193:8443#@ConfigV2RayNG
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo0YTJyZml4b3BoZGpmZmE4S1ZBNEFh@45.87.175.157:8080#@v2Source
+ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTo3OGI2ZTkzZTU0MjI1ODAz@51.75.168.50:26179#%F0%9F%A6%8483@oneclickvpnkeys
+vmess://eyJ2Ij...Cfh6/wn4e1SlAtMTAiLCJhZGQiOiIxMDMuMTI3LjI0My42NiIsInBvcnQiOjU0MjkxLCJpZCI6ImM1ODU2ZTBiLTVjYTYtNDliZi04NTI1LWQwMmFmOWMzN2NmNSIsImFpZCI6MCwic2N5IjoiYXV0byIsIm5ldCI6InRjcCIsInR5cGUiOiJodHRwIiwidGxzIjoiIiwiYWxwbiI6IiIsInBhdGgiOiIvQUJDREUifQ==
+vmess://eyJ2Ij...0g8J+MkFhYLTEyMiIsInNjeSI6ImF1dG8iLCJzbmkiOiJjZG4uc2ZhY2cudWsiLCJ0bHMiOiJ0bHMiLCJ0eXBlIjoibm9uZSIsInYiOiIyIiwidmNuIjoiIn0=

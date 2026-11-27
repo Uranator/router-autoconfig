@@ -1,0 +1,127 @@
+{
+  "inbounds": [
+    {
+      "port": 10808,
+      "listen": "127.0.0.1",
+      "protocol": "socks",
+      "settings": {
+        "udp": true,
+        "auth": "noauth"
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": ["http", "tls"]
+      }
+    },
+    {
+      "port": 10809,
+      "listen": "127.0.0.1",
+      "protocol": "http",
+      "settings": {
+        "udp": true
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": ["http", "tls"]
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "tag": "VPS-Reality",
+      "protocol": "vless",
+      "settings": {
+        "vnext": [
+          {
+            "address": "138.124.112.202",
+            "port": 443,
+            "users": [
+              {
+                "id": "14297db4-54b6-4d20-bda5-fdeb997f6c0a",
+                "flow": "xtls-rprx-vision",
+                "encryption": "none"
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "show": false,
+          "fingerprint": "chrome",
+          "serverName": "www.microsoft.com",
+          "publicKey": "DjkuH9C_ZuXUqHxkkcZQqsMJyuh_F_5GADBTrnoodxc",
+          "shortId": "75de117772021de3",
+          "spiderX": "/"
+        }
+      }
+    },
+    {
+      "tag": "VPS-Hysteria2",
+      "protocol": "hysteria2",
+      "settings": {
+        "servers": [
+          {
+            "address": "138.124.112.202",
+            "port": 8445,
+            "password": "XSgT1WvxQX0QyUsaJrkCg5IpOmXM40JQskNwfEI+XPg=",
+            "alpn": ["h3"],
+            "sni": "www.microsoft.com",
+            "insecure": true,
+            "upMbps": 100,
+            "downMbps": 100
+          }
+        ]
+      }
+    },
+    {
+      "tag": "VPS-SS2022",
+      "protocol": "shadowsocks",
+      "settings": {
+        "servers": [
+          {
+            "address": "138.124.112.202",
+            "port": 8388,
+            "method": "2022-blake3-aes-128-gcm",
+            "password": "F25Pxnnp/Dt0rxARg+MxeRpYlRDW3piaainUeJhZnMs=",
+            "udp": true
+          }
+        ]
+      }
+    },
+    {
+      "tag": "DIRECT",
+      "protocol": "freedom",
+      "settings": {}
+    },
+    {
+      "tag": "BLOCK",
+      "protocol": "blackhole",
+      "settings": {}
+    }
+  ],
+  "routing": {
+    "domainStrategy": "IPIfNonMatch",
+    "rules": [
+      {
+        "type": "field",
+        "ip": ["geoip:cn", "geoip:private"],
+        "outboundTag": "DIRECT"
+      },
+      {
+        "type": "field",
+        "domain": ["geosite:cn"],
+        "outboundTag": "DIRECT"
+      }
+    ]
+  },
+  "dns": {
+    "servers": [
+      "https://dns.google/dns-query",
+      "https://cloudflare-dns.com/dns-query",
+      "localhost"
+    ]
+  }
+}

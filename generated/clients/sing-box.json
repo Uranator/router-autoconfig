@@ -1,0 +1,155 @@
+{
+  "log": {
+    "level": "info",
+    "timestamp": true
+  },
+  "inbounds": [
+    {
+      "type": "tun",
+      "inet4_address": "172.19.0.1/30",
+      "auto_route": true,
+      "strict_route": true,
+      "sniff": true,
+      "sniff_override_destination": true
+    },
+    {
+      "type": "mixed",
+      "listen": "127.0.0.1",
+      "listen_port": 1080,
+      "sniff": true,
+      "sniff_override_destination": true,
+      "set_system_proxy": true
+    }
+  ],
+  "outbounds": [
+    {
+      "type": "vless",
+      "tag": "VPS-Reality",
+      "server": "138.124.112.202",
+      "server_port": 443,
+      "uuid": "14297db4-54b6-4d20-bda5-fdeb997f6c0a",
+      "flow": "xtls-rprx-vision",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.microsoft.com",
+        "utls": {
+          "enabled": true,
+          "fingerprint": "chrome"
+        },
+        "reality": {
+          "enabled": true,
+          "public_key": "DjkuH9C_ZuXUqHxkkcZQqsMJyuh_F_5GADBTrnoodxc",
+          "short_id": "75de117772021de3"
+        }
+      }
+    },
+    {
+      "type": "hysteria2",
+      "tag": "VPS-Hysteria2",
+      "server": "138.124.112.202",
+      "server_port": 8445,
+      "password": "XSgT1WvxQX0QyUsaJrkCg5IpOmXM40JQskNwfEI+XPg=",
+      "tls": {
+        "enabled": true,
+        "server_name": "www.microsoft.com",
+        "insecure": true
+      },
+      "up_mbps": 100,
+      "down_mbps": 100
+    },
+    {
+      "type": "shadowsocks",
+      "tag": "VPS-SS2022",
+      "server": "138.124.112.202",
+      "server_port": 8388,
+      "method": "2022-blake3-aes-128-gcm",
+      "password": "F25Pxnnp/Dt0rxARg+MxeRpYlRDW3piaainUeJhZnMs="
+    },
+    {
+      "type": "urltest",
+      "tag": "Auto",
+      "outbounds": ["VPS-Reality", "VPS-Hysteria2", "VPS-SS2022"],
+      "url": "https://www.gstatic.com/generate_204",
+      "interval": "60s",
+      "tolerance": 50
+    },
+    {
+      "type": "selector",
+      "tag": "VPS",
+      "outbounds": ["Auto", "VPS-Reality", "VPS-Hysteria2", "VPS-SS2022"],
+      "default": "Auto"
+    },
+    {
+      "type": "direct",
+      "tag": "DIRECT"
+    },
+    {
+      "type": "block",
+      "tag": "BLOCK"
+    },
+    {
+      "type": "dns",
+      "tag": "DNS_OUT"
+    }
+  ],
+  "route": {
+    "rules": [
+      {
+        "protocol": "dns",
+        "outbound": "DNS_OUT"
+      },
+      {
+        "geosite": "cn",
+        "outbound": "DIRECT"
+      },
+      {
+        "geoip": "cn",
+        "outbound": "DIRECT"
+      },
+      {
+        "outbound": "VPS"
+      }
+    ],
+    "auto_detect_interface": true,
+    "final": "VPS"
+  },
+  "dns": {
+    "servers": [
+      {
+        "tag": "google",
+        "address": "https://dns.google/dns-query",
+        "detour": "VPS"
+      },
+      {
+        "tag": "cloudflare",
+        "address": "https://cloudflare-dns.com/dns-query",
+        "detour": "VPS"
+      },
+      {
+        "tag": "local",
+        "address": "local",
+        "detour": "DIRECT"
+      }
+    ],
+    "rules": [
+      {
+        "geosite": "cn",
+        "server": "local"
+      },
+      {
+        "server": "google"
+      }
+    ],
+    "final": "google"
+  },
+  "experimental": {
+    "clash_api": {
+      "external_controller": "127.0.0.1:9090",
+      "external_ui": "ui",
+      "external_ui_download_url": "",
+      "external_ui_download_detour": "",
+      "secret": "",
+      "default_mode": "Rule"
+    }
+  }
+}

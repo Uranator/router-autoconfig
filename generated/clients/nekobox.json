@@ -1,0 +1,59 @@
+{
+  "version": 2,
+  "name": "VPS Configs",
+  "proxies": [
+    {
+      "name": "VPS-Reality",
+      "type": "vless",
+      "server": "138.124.112.202",
+      "port": 443,
+      "uuid": "14297db4-54b6-4d20-bda5-fdeb997f6c0a",
+      "flow": "xtls-rprx-vision",
+      "tls": true,
+      "reality": true,
+      "public-key": "DjkuH9C_ZuXUqHxkkcZQqsMJyuh_F_5GADBTrnoodxc",
+      "short-id": "75de117772021de3",
+      "servername": "www.microsoft.com",
+      "client-fingerprint": "chrome",
+      "network": "tcp"
+    },
+    {
+      "name": "VPS-Hysteria2",
+      "type": "hysteria2",
+      "server": "138.124.112.202",
+      "port": 8445,
+      "password": "XSgT1WvxQX0QyUsaJrkCg5IpOmXM40JQskNwfEI+XPg=",
+      "sni": "www.microsoft.com",
+      "skip-cert-verify": true,
+      "up-mbps": 100,
+      "down-mbps": 100
+    },
+    {
+      "name": "VPS-SS2022",
+      "type": "shadowsocks",
+      "server": "138.124.112.202",
+      "port": 8388,
+      "cipher": "2022-blake3-aes-128-gcm",
+      "password": "F25Pxnnp/Dt0rxARg+MxeRpYlRDW3piaainUeJhZnMs=",
+      "udp": true
+    }
+  ],
+  "proxy-groups": [
+    {
+      "name": "VPS",
+      "type": "select",
+      "proxies": ["VPS-Reality", "VPS-Hysteria2", "VPS-SS2022"]
+    },
+    {
+      "name": "Auto",
+      "type": "url-test",
+      "proxies": ["VPS-Reality", "VPS-Hysteria2", "VPS-SS2022"],
+      "url": "https://www.gstatic.com/generate_204",
+      "interval": 60
+    }
+  ],
+  "rules": [
+    "GEOIP,CN,DIRECT",
+    "MATCH,VPS"
+  ]
+}
