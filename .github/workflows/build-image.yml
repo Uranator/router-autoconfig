@@ -33,7 +33,7 @@ jobs:
 
       - name: Download and extract OpenWrt ImageBuilder
         run: |
-          VERSION="24.10.0"
+          VERSION="24.10.5"
           TARGET="mediatek/filogic"
           FILE_HOST="https://downloads.openwrt.org"
           DOWNLOAD_PATH="$FILE_HOST/releases/$VERSION/targets/$TARGET"
@@ -54,12 +54,12 @@ jobs:
       - name: Create repositories.conf
         run: |
           cat > repositories.conf << 'EOF'
-          src/gz openwrt_core https://downloads.openwrt.org/releases/24.10.0/targets/mediatek/filogic/packages
-          src/gz openwrt_base https://downloads.openwrt.org/releases/24.10.0/packages/aarch64_cortex-a53/base
-          src/gz openwrt_luci https://downloads.openwrt.org/releases/24.10.0/packages/aarch64_cortex-a53/luci
-          src/gz openwrt_packages https://downloads.openwrt.org/releases/24.10.0/packages/aarch64_cortex-a53/packages
-          src/gz openwrt_routing https://downloads.openwrt.org/releases/24.10.0/packages/aarch64_cortex-a53/routing
-          src/gz openwrt_telephony https://downloads.openwrt.org/releases/24.10.0/packages/aarch64_cortex-a53/telephony
+          src/gz openwrt_core https://downloads.openwrt.org/releases/24.10.5/targets/mediatek/filogic/packages
+          src/gz openwrt_base https://downloads.openwrt.org/releases/24.10.5/packages/aarch64_cortex-a53/base
+          src/gz openwrt_luci https://downloads.openwrt.org/releases/24.10.5/packages/aarch64_cortex-a53/luci
+          src/gz openwrt_packages https://downloads.openwrt.org/releases/24.10.5/packages/aarch64_cortex-a53/packages
+          src/gz openwrt_routing https://downloads.openwrt.org/releases/24.10.5/packages/aarch64_cortex-a53/routing
+          src/gz openwrt_telephony https://downloads.openwrt.org/releases/24.10.5/packages/aarch64_cortex-a53/telephony
           EOF
 
       - name: Build OpenWrt Image
@@ -67,7 +67,7 @@ jobs:
           set -o pipefail
           INSTALL=/usr/bin/install make image \
             PROFILE="cudy_wr3000s-v1" \
-            PACKAGES="tachyon luci-app-tachyon luci-i18n-tachyon-ru zram-swap -wireguard-tools -ppp -ppp-mod-pppoe -kmod-nft-offload" \
+            PACKAGES="tachyon tachyon-core luci-app-tachyon luci-i18n-tachyon-ru zram-swap -wireguard-tools -ppp -ppp-mod-pppoe -kmod-nft-offload" \
             EXTRA_IMAGE_NAME="v1.0.0" \
             BIN_DIR="${{ github.workspace }}/artifacts/bin" \
             FORCE=1 \
