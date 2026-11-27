@@ -1,3 +1,3 @@
 vless://14297db4-54b6-4d20-bda5-fdeb997f6c0a@138.124.112.202:443?encryption=none&flow=xtls-rprx-vision&fp=chrome&pbk=DjkuH9C_ZuXUqHxkkcZQqsMJyuh_F_5GADBTrnoodxc&security=reality&sid=75de117772021de3&sni=www.microsoft.com&type=tcp#VPS-Reality
 hy2://XSgT1WvxQX0QyUsaJrkCg5IpOmXM40JQskNwfEI+XPg=@138.124.112.202:8445?sni=www.microsoft.com&insecure=1#VPS-Hysteria2
-ss://2022-blake3-aes-128-gcm:F25Pxnnp/Dt0rxARg+MxeRpYlRDW3piaainUeJhZnMs=@138.124.112.202:8388#VPS-SS2022
+ss://2022-blake3-aes-128-gcm:rgfTrJLQLchA+5bjeIIl0g==@138.124.112.202:8388#VPS-SS2022

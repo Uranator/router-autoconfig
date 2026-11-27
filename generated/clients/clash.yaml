@@ -70,7 +70,7 @@ proxies:
     server: 138.124.112.202
     port: 8388
     cipher: "2022-blake3-aes-128-gcm"
-    password: "F25Pxnnp/Dt0rxARg+MxeRpYlRDW3piaainUeJhZnMs="
+    password: "rgfTrJLQLchA+5bjeIIl0g=="
     udp: true
 proxy-groups:
   - name: "VPS"
