@@ -27,8 +27,9 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y bison build-essential ccache clang curl coreutils file flex g++ g++-multilib gawk gcc-multilib genisoimage gettext git git-core gosu libdw-dev libelf-dev libncurses5-dev libssl-dev locales pv pwgen python3 python3-cryptography python3-pip python3-pyelftools python3-setuptools python3-venv qemu-utils rsync signify-openbsd subversion swig unzip wget zlib1g-dev zstd jq axel
-          # Ensure GNU install is available as ginstall
+          # Ensure GNU install is available
           sudo ln -sf /usr/bin/install /usr/local/bin/ginstall
+          sudo ln -sf /usr/bin/install /usr/local/bin/install
 
       - name: Download and extract OpenWrt ImageBuilder
         run: |
@@ -64,7 +65,7 @@ jobs:
       - name: Build OpenWrt Image
         run: |
           set -o pipefail
-          make image \
+          INSTALL=/usr/bin/install make image \
             PROFILE="cudy_wr3000s-v1" \
             PACKAGES="tachyon luci-app-tachyon luci-i18n-tachyon-ru zram-swap -wireguard-tools -ppp -ppp-mod-pppoe -kmod-nft-offload" \
             EXTRA_IMAGE_NAME="v1.0.0" \
