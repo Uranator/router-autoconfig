@@ -26,7 +26,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt update
-          sudo apt install -y bison build-essential ccache clang curl file flex g++ g++-multilib gawk gcc-multilib genisoimage gettext git git-core gosu libdw-dev libelf-dev libncurses5-dev libssl-dev locales pv pwgen python3 python3-cryptography python3-pip python3-pyelftools python3-setuptools python3-venv qemu-utils rsync signify-openbsd subversion swig unzip wget zlib1g-dev zstd jq axel
+          sudo apt install -y bison build-essential ccache clang curl coreutils file flex g++ g++-multilib gawk gcc-multilib genisoimage gettext git git-core gosu libdw-dev libelf-dev libncurses5-dev libssl-dev locales pv pwgen python3 python3-cryptography python3-pip python3-pyelftools python3-setuptools python3-venv qemu-utils rsync signify-openbsd subversion swig unzip wget zlib1g-dev zstd jq axel
 
       - name: Download and extract OpenWrt ImageBuilder
         run: |
@@ -66,6 +66,7 @@ jobs:
             PACKAGES="tachyon luci-app-tachyon luci-i18n-tachyon-ru zram-swap -wireguard-tools -ppp -ppp-mod-pppoe -kmod-nft-offload" \
             EXTRA_IMAGE_NAME="v1.0.0" \
             BIN_DIR="${{ github.workspace }}/artifacts/bin" \
+            FORCE=1 \
             2>&1 | tee build.log
 
       - name: Copy config files to image
