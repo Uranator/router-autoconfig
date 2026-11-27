@@ -26,7 +26,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt update
-          sudo apt install -y bison build-essential ccache clang curl file flex g++ g++-multilib gawk gcc-multilib genisoimage gettext git git-core gosu libdw-dev libelf-dev libncurses5-dev libssl-dev locales pv pwgen python3 python3-cryptography python3-pip python3-pyelftools python3-setuptools python3-venv qemu-utils rsync signify-openbsd subversion swig unzip wget zlib1g-dev zstd jq axel gpg
+          sudo apt install -y bison build-essential ccache clang curl file flex g++ g++-multilib gawk gcc-multilib genisoimage gettext git git-core gosu libdw-dev libelf-dev libncurses5-dev libssl-dev locales pv pwgen python3 python3-cryptography python3-pip python3-pyelftools python3-setuptools python3-venv qemu-utils rsync signify-openbsd subversion swig unzip wget zlib1g-dev zstd jq axel
 
       - name: Download and extract OpenWrt ImageBuilder
         run: |
@@ -36,20 +36,6 @@ jobs:
           DOWNLOAD_PATH="$FILE_HOST/releases/$VERSION/targets/$TARGET"
           
           wget -nv "$DOWNLOAD_PATH/sha256sums" -O sha256sums
-          wget -nv "$DOWNLOAD_PATH/sha256sums.asc" -O sha256sums.asc
-          
-          # Download the OpenWrt signing key from the release directory
-          wget -nv "$FILE_HOST/releases/$VERSION/openwrt.gpg" -O /tmp/openwrt.gpg 2>/dev/null || \
-          wget -nv "$FILE_HOST/openwrt.gpg" -O /tmp/openwrt.gpg 2>/dev/null || \
-          wget -nv "$FILE_HOST/keys/openwrt.gpg" -O /tmp/openwrt.gpg 2>/dev/null || \
-          echo "Warning: Could not download signing key, skipping GPG verification"
-          
-          if [ -f /tmp/openwrt.gpg ]; then
-            gpg --import /tmp/openwrt.gpg
-            gpg --verify sha256sums.asc sha256sums
-          else
-            echo "Skipping GPG verification (no key available)"
-          fi
           
           file_name=$(grep "imagebuilder-.*x86_64.tar" sha256sums | cut -d "*" -f 2 | head -1)
           echo "Downloading: $file_name"
@@ -58,7 +44,7 @@ jobs:
           sha256sum -c <(grep "$file_name" sha256sums)
           
           tar xf "$file_name" --strip=1 --no-same-owner -C .
-          rm -f "$file_name" sha256sums sha256sums.asc
+          rm -f "$file_name" sha256sums
           
           echo "ImageBuilder extracted to $(pwd)"
 
