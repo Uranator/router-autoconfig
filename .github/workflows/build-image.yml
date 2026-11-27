@@ -26,7 +26,13 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt update
-          sudo apt install -y bison build-essential ccache clang curl file flex g++ g++-multilib gawk gcc-multilib genisoimage gettext git git-core gosu libdw-dev libelf-dev libncurses5-dev libssl-dev locales pv pwgen python3 python3-cryptography python3-pip python3-pyelftools python3-setuptools python3-venv qemu-utils rsync signify-openbsd subversion swig unzip wget zlib1g-dev zstd jq axel
+          sudo apt install -y bison build-essential ccache clang curl file flex g++ g++-multilib gawk gcc-multilib genisoimage gettext git git-core gosu libdw-dev libelf-dev libncurses5-dev libssl-dev locales pv pwgen python3 python3-cryptography python3-pip python3-pyelftools python3-setuptools python3-venv qemu-utils rsync signify-openbsd subversion swig unzip wget zlib1g-dev zstd jq axel gpg
+
+      - name: Download OpenWrt signing keys
+        run: |
+          mkdir -p /tmp/openwrt-keys
+          wget -q -O /tmp/openwrt-keys/openwrt.gpg https://downloads.openwrt.org/releases/24.10.0/targets/mediatek/filogic/openwrt.gpg
+          gpg --import /tmp/openwrt-keys/openwrt.gpg
 
       - name: Download and extract OpenWrt ImageBuilder
         run: |
@@ -38,7 +44,6 @@ jobs:
           wget -nv "$DOWNLOAD_PATH/sha256sums" -O sha256sums
           wget -nv "$DOWNLOAD_PATH/sha256sums.asc" -O sha256sums.asc
           
-          gpg --import /usr/share/openwrt/keys/*.asc 2>/dev/null || true
           gpg --verify sha256sums.asc sha256sums
           
           file_name=$(grep "imagebuilder-.*x86_64.tar" sha256sums | cut -d "*" -f 2 | head -1)
